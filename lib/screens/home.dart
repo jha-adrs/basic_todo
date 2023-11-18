@@ -143,8 +143,7 @@ class _HomeState extends State<Home> {
           InkWell(
             onTap: () {
               // Handle the add button tap
-              print("Added new");
-              print(_toDoController.text);
+              
               _addToDoItem(_toDoController.text);
             },
             child: Container(
