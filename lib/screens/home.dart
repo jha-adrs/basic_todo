@@ -11,14 +11,18 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final todosList = ToDo.todoList();
+  final _todosList = ToDoList();
   final _toDoController = TextEditingController();
   List<ToDo> filteredList = [];
 
   @override
   void initState() {
-    filteredList = todosList;
     super.initState();
+    _todosList.load().then((_) {
+      setState(() {
+        filteredList = _todosList.todos;
+      });
+    });
   }
 
   @override
@@ -169,7 +173,7 @@ class _HomeState extends State<Home> {
 
   void _handleToDoDeleted(String id) {
     setState(() {
-      todosList.removeWhere((element) => element.id == id);
+      _todosList.removeWhere((element) => element.id == id);
     });
   }
 
@@ -178,7 +182,7 @@ class _HomeState extends State<Home> {
       return;
     }else{
       setState(() {
-      todosList.add(ToDo(
+      _todosList.add(ToDo(
         id: DateTime.now().millisecondsSinceEpoch.toString(),
         title: title,
         isDone: false,
@@ -194,9 +198,9 @@ class _HomeState extends State<Home> {
     List<ToDo> results = [];
     final trimmedTitle = title.trim();
     if (trimmedTitle.isEmpty) {
-      results = todosList;
+      results = _todosList.todos;
     } else {
-      results = todosList
+      results = _todosList
           .where((element) =>
               element.title!.toLowerCase().contains(trimmedTitle.toLowerCase()))
           .toList();
