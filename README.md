@@ -1,6 +1,7 @@
-# flutter_application_1
+# flutter_application_1 : ToDO App
 
-A new Flutter project.
+A new Flutter project. Well, tried something new.
+* This project has basic Add, Delete, Search functionality, with local storage access *
 
 ## Getting Started
 
